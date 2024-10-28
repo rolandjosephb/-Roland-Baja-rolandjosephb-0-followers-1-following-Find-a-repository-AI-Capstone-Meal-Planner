@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Meal Plans</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Meal Plan History</h1>
+    <a href="{{ url_for('index') }}">
+        <button type="button">Go Back</button>
+    </a>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Fitness Goal</th>
+                <th>Food Preference</th>
+                <th>Allergies</th>
+                <th>Weight</th>
+                <th>Height</th>
+                <th>Daily Calories</th>
+                <th>Meal Plan</th>
+                <th>Actions</th> 
+            </tr>
+        </thead>
+        <tbody>
+            {% for meal_plan in meal_plans %}
+            <tr>
+                <td>{{ meal_plan[0] }}</td>
+                <td>{{ meal_plan[1] }}</td>
+                <td>{{ meal_plan[2] }}</td>
+                <td>{{ meal_plan[3] }}</td>
+                <td>{{ meal_plan[4] }}</td>
+                <td>{{ meal_plan[5] }}</td>
+                <td>{{ meal_plan[6] }}</td>
+                <td>{{ meal_plan[7] }}</td>
+                <td>
+                    <form action="{{ url_for('delete_meal_plan_route', meal_plan_id=meal_plan[0]) }}" method="post">
+                        <button type="submit">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

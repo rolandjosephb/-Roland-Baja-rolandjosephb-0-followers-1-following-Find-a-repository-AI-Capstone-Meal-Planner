@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meal Planner</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Meal Planner</h1>
+    <form id="meal-plan-form">
+        <label for="fitness_goal">Fitness Goal:</label>
+        <input type="text" id="fitness_goal" name="fitness_goal" required>
+
+        <label for="food_preference">Food Preference:</label>
+        <input type="text" id="food_preference" name="food_preference" required>
+
+        <label for="allergies">Allergies:</label>
+        <input type="text" id="allergies" name="allergies">
+
+        <label for="weight">Weight (kg):</label>
+        <input type="number" id="weight" name="weight" required>
+
+        <label for="height">Height (e.g., 5'6):</label>
+        <input type="text" id="height" name="height" required>
+
+        <label for="daily_calories">Daily Calorie Needs:</label>
+        <input type="number" id="daily_calories" name="daily_calories" required>
+
+        <button type="button" id="autogenerate">Autogenerate</button>
+
+        <input type="submit" value="Generate Meal Plan">
+    </form>
+
+    <div id="meal-plan-result"></div>
+
+    
+    <button id="view-meal-plans-button" onclick="window.location.href='/view_meal_plans'">View Meal Plans History</button>
+
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

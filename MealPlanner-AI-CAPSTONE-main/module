@@ -1,0 +1,12 @@
+
+setup the .venv and
+pip install fastapi,
+openai,
+uvicorn,
+langchain,
+asyncio,
+asyncpg
+install postgressql
+pip install google-generativeai
+pip install python-dotenv
+
