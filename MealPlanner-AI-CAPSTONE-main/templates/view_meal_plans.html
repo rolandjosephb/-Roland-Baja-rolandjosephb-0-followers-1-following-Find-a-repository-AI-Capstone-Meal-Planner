@@ -15,12 +15,16 @@
         <thead>
             <tr>
                 <th>ID</th>
-                <th>Fitness Goal</th>
+                <th>Food Available</th>  
+                
                 <th>Food Preference</th>
                 <th>Allergies</th>
                 <th>Weight</th>
                 <th>Height</th>
-                <th>Daily Calories</th>
+                <th>Age</th> 
+                <th>Number of People</th> 
+                <th>Sex</th>  
+                <th>Fitness Goal</th>
                 <th>Meal Plan</th>
                 <th>Actions</th> 
             </tr>
@@ -34,11 +38,14 @@
                 <td>{{ meal_plan[3] }}</td>
                 <td>{{ meal_plan[4] }}</td>
                 <td>{{ meal_plan[5] }}</td>
-                <td>{{ meal_plan[6] }}</td>
-                <td>{{ meal_plan[7] }}</td>
+                <td>{{ meal_plan[6] }}</td>  <!-- New data -->
+                <td>{{ meal_plan[7] }}</td>  <!-- New data -->
+                <td>{{ meal_plan[8] }}</td>  <!-- New data -->
+                <td>{{ meal_plan[9] }}</td>  <!-- New data -->
+                <td>{{ meal_plan[10] }}</td> 
                 <td>
-                    <form action="{{ url_for('delete_meal_plan_route', meal_plan_id=meal_plan[0]) }}" method="post">
-                        <button type="submit">Delete</button>
+                    <form action="{{ url_for('delete_meal_plan_route', meal_plan_id=meal_plan[0]) }}" method="POST">
+                        <input type="submit" value="Delete">
                     </form>
                 </td>
             </tr>

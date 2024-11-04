@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe Generator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>AI-Powered Recipe Generator</h1>
+    <nav>
+        <ul>
+            <li><a href="/">Generate Meal Plan</a></li>
+            <li><a href="/recipe_generator">Recipe Generator</a></li>
+            <li><a href="/">Nutrient & Caloric Tracking</a></li>
+        </ul>
+    </nav>
+    <form id="recipe-form">
+        <label for="recipe_input">Enter Ingredients (comma separated):</label>
+        <input type="text" id="recipe_input" name="recipe_input" required>
+
+        <label for="dietary_restrictions">Dietary Restrictions:</label>
+        <input type="text" id="dietary_restrictions" name="dietary_restrictions">
+
+        <input type="submit" value="Generate Recipe">
+    </form>
+
+    <div id="recipe-result"></div>
+
+    <button id="view-favorites-button" onclick="window.location.href='/view_favorites'">View Favorite Recipes</button>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
