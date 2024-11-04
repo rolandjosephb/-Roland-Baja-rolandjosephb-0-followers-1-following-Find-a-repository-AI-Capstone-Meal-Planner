@@ -24,11 +24,13 @@ document.getElementById('autogenerate').addEventListener('click', async () => {
 
     const formData = await response.json();
 
-
     document.getElementById('fitness_goal').value = formData.fitness_goal;
     document.getElementById('food_preference').value = formData.food_preference;
     document.getElementById('allergies').value = formData.allergies;
     document.getElementById('weight').value = formData.weight;
     document.getElementById('height').value = formData.height;
-    document.getElementById('daily_calories').value = formData.daily_calories;
+    document.getElementById('age').value = formData.age;
+    document.getElementById('number_of_people').value = formData.number_of_people;
+    document.getElementById('sex').value = formData.sex;
+    document.getElementById('food_available').value = formData.food_available;
 });
