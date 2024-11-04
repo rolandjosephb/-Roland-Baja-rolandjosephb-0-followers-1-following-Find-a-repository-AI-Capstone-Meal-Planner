@@ -6,14 +6,14 @@ import os
 def connect_db():
     conn = psycopg2.connect(
         dbname="postgres",
-        user="team1",
-        password="mypassword",
-        host="134.231.46.151",
+        user="postgres",
+        password="206v15ALdw",
+        host="localhost",
         port="5432"
     )
     return conn
 
-# Create a table in postgress named meal_plans..just check below
+# Create a table in PostgreSQL named meal_plans
 def create_table():
     conn = connect_db()
     cursor = conn.cursor()
@@ -25,7 +25,10 @@ def create_table():
             allergies TEXT,
             weight INT,
             height TEXT,
-            daily_calories INT,
+            age TEXT,
+            number_of_people INT,
+            sex TEXT,
+            food_available TEXT,
             meal_plan TEXT
         )
     """)
@@ -34,13 +37,13 @@ def create_table():
     conn.close()
 
 # Save meal plan to the database
-def save_meal_plan(fitness_goal, food_preference, allergies, weight, height, daily_calories, meal_plan):
+def save_meal_plan(fitness_goal, food_preference, allergies, weight, height, age, number_of_people, sex, food_available, meal_plan):
     conn = connect_db()
     cursor = conn.cursor()
     cursor.execute("""
-        INSERT INTO meal_plans (fitness_goal, food_preference, allergies, weight, height, daily_calories, meal_plan)
-        VALUES (%s, %s, %s, %s, %s, %s, %s)
-    """, (fitness_goal, food_preference, allergies, weight, height, daily_calories, meal_plan))
+        INSERT INTO meal_plans (fitness_goal, food_preference, allergies, weight, height, age, number_of_people, sex, food_available, meal_plan)
+        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+    """, (fitness_goal, food_preference, allergies, weight, height, age, number_of_people, sex, food_available, meal_plan))
     conn.commit()
     cursor.close()
     conn.close()

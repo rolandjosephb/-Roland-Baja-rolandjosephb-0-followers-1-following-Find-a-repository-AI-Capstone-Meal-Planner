@@ -1,18 +1,24 @@
 import random
 
-def construct_meal_plan_query(fitness_goal, food_preference, allergies, weight, height, daily_calories):
+def construct_meal_plan_query(food_available, food_preference, allergies, weight, height, age, number_of_people, sex, fitness_goal ):
+    # Calculate total meals based on the number of people
+    meal_suffix = f" for {number_of_people} people"
+    
     query = (
-        f"My fitness goal is {fitness_goal}.\n"
+        f"The available food includes: {food_available}.\n Only Served available food if you dont have, tell them"
         f"I prefer {food_preference} food.\n"
         f"I have allergies to {allergies}.\n"
         f"My weight is {weight} kg and my height is {height}.\n"
-        f"My daily calorie requirement is {daily_calories} calories.\n"
+        f"I am {age} years old and I have {number_of_people} people to feed.\n"
+        f"My sex is {sex}.\n"
+        f"My fitness goal is {fitness_goal}.\n"
+       
         "Please create a 7-day meal plan with specific meals formatted like:\n"
         "Day 1:\n\n"
-        "Breakfast (# calories):** Example meal description.\n"
-        "Lunch (# calories):** Example meal description.\n"
-        "Dinner (# calories):** Example meal description.\n"
-        "Snacks (# calories):** Example snack description.\n"
+        f"Breakfast (# calories):** Example meal description{meal_suffix}.\n"
+        f"Lunch (# calories):** Example meal description{meal_suffix}.\n"
+        f"Dinner (# calories):** Example meal description{meal_suffix}.\n"
+        f"Snacks (# calories):** Example snack description{meal_suffix}.\n"
         
         "**Important Tips:\n"
         "Portion control is key: Use measuring cups and spoons to ensure you're staying within your calorie goals.\n"
@@ -32,7 +38,7 @@ def construct_meal_plan_query(fitness_goal, food_preference, allergies, weight, 
 def generate_random_form_data():
     fitness_goals = ["weight loss", "muscle gain", "maintenance"]
     
-    # food options
+    # Food options
     food_options = [
         "vegetarian", 
         "vegan", 
@@ -44,7 +50,7 @@ def generate_random_form_data():
         "high-protein"
     ]
     
-    # autogenerate query
+    # Autogenerate query
     selected_food_preferences = random.sample(food_options, k=random.randint(1, 3))  # Randomly choose 1 to 3 unique options
     food_preference_sentence = f"I prefer {', '.join(selected_food_preferences)} food."
 
@@ -56,7 +62,10 @@ def generate_random_form_data():
         "allergies": random.choice(allergies_list),
         "weight": random.randint(50, 100),  # Random weight between 50 and 100 kg
         "height": f"{random.randint(5, 6)}'{random.randint(0, 11)}",  # Random height between 5'0" and 6'11"
-        "daily_calories": random.randint(1500, 3000)  # Random daily calories between 1500 and 3000
+        "age": random.randint(18, 60),  # Random age between 18 and 60
+        "number_of_people": random.randint(1, 8),  # Random number of people to feed
+        "sex": random.choice(["male", "female"]),  # Randomly assign sex
+        "food_available": "chicken, rice, vegetables, fruits"  # Example of available food
     }
 
     return generated_data
