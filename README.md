@@ -1,10 +1,10 @@
 setup a new environment
 
-pip install fastapi,
-pip install openai,
-pip install uvicorn,
-pip install langchain,
-pip install asyncio,
+pip install fastapi
+pip install openai
+pip install uvicorn
+pip install langchain
+pip install asyncio
 pip install asyncpg
 pip install google-generativeai
 pip install python-dotenv
