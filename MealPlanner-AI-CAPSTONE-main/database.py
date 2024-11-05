@@ -1,68 +1,95 @@
 import psycopg2
 from psycopg2 import sql
-import os
 
-# Connect to the PostgreSQL
 def connect_db():
-    conn = psycopg2.connect(
-        dbname="postgres",
-        user="postgres",
-        password="206v15ALdw",
-        host="localhost",
-        port="5432"
-    )
+    conn = psycopg2.connect(dbname="postgres", user="postgres", password="206v15ALdw", host="localhost", port="5432")
     return conn
 
-# Create a table in PostgreSQL named meal_plans
 def create_table():
     conn = connect_db()
     cursor = conn.cursor()
     cursor.execute("""
-        CREATE TABLE IF NOT EXISTS meal_plans (
-            id SERIAL PRIMARY KEY,
-            fitness_goal TEXT,
-            food_preference TEXT,
-            allergies TEXT,
-            weight INT,
-            height TEXT,
-            age TEXT,
-            number_of_people INT,
-            sex TEXT,
-            food_available TEXT,
-            meal_plan TEXT
-        )
+    CREATE TABLE IF NOT EXISTS meal_plans (
+        id SERIAL PRIMARY KEY,
+        food_available TEXT,
+        food_preference TEXT,
+        allergies TEXT,
+        weight INTEGER,
+        height TEXT,
+        age INTEGER,
+        number_of_people INTEGER,
+        sex TEXT,
+        fitness_goal TEXT,
+        meal_plan TEXT
+    );
     """)
+    
+    cursor.execute("""
+    CREATE TABLE IF NOT EXISTS recipe_generated (
+        id SERIAL PRIMARY KEY,
+        ingredients TEXT,
+        number_of_servings INTEGER,
+        food_preferences TEXT,
+        allergies TEXT,
+        special_requests TEXT,
+        recipe TEXT
+    );
+    """)
+    
     conn.commit()
     cursor.close()
     conn.close()
 
-# Save meal plan to the database
-def save_meal_plan(fitness_goal, food_preference, allergies, weight, height, age, number_of_people, sex, food_available, meal_plan):
+def save_meal_plan(food_available, food_preference, allergies, weight, height, age, number_of_people, sex, fitness_goal, meal_plan):
     conn = connect_db()
     cursor = conn.cursor()
     cursor.execute("""
-        INSERT INTO meal_plans (fitness_goal, food_preference, allergies, weight, height, age, number_of_people, sex, food_available, meal_plan)
-        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
-    """, (fitness_goal, food_preference, allergies, weight, height, age, number_of_people, sex, food_available, meal_plan))
+    INSERT INTO meal_plans (food_available, food_preference, allergies, weight, height, age, number_of_people, sex, fitness_goal, meal_plan)
+    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s);
+    """, (food_available, food_preference, allergies, weight, height, age, number_of_people, sex, fitness_goal, meal_plan))
+    
     conn.commit()
     cursor.close()
     conn.close()
 
-# Get all meal plans from the database
-def get_meal_plans():
+def save_generated_recipe(ingredients,number_of_servings, food_preferences, allergies, special_requests, recipe):
     conn = connect_db()
     cursor = conn.cursor()
-    cursor.execute("SELECT * FROM meal_plans")
+    cursor.execute("""
+    INSERT INTO recipe_generated (ingredients, number_of_servings, food_preferences, allergies, special_requests, recipe)
+    VALUES (%s, %s,  %s, %s, %s, %s);
+    """, (ingredients, number_of_servings, food_preferences, allergies, special_requests, recipe))
+    
+    conn.commit()
+    cursor.close()
+    conn.close()
+
+def get_recipes():
+    conn = connect_db()
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM recipe_generated;")
     meal_plans = cursor.fetchall()
     cursor.close()
     conn.close()
     return meal_plans
 
-# Delete a meal plan from the database
+def get_meal_plans():
+    conn = connect_db()
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM meal_plans;")
+    meal_plans = cursor.fetchall()
+    cursor.close()
+    conn.close()
+    return meal_plans
+
+
+
+
+
 def delete_meal_plan(meal_plan_id):
     conn = connect_db()
     cursor = conn.cursor()
-    cursor.execute("DELETE FROM meal_plans WHERE id = %s", (meal_plan_id,))
+    cursor.execute("DELETE FROM meal_plans WHERE id = %s;", (meal_plan_id,))
     conn.commit()
     cursor.close()
     conn.close()
