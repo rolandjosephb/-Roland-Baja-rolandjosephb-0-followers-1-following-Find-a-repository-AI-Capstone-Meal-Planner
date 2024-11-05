@@ -39,6 +39,8 @@ def construct_recipe(ingredients,number_of_servings , food_preferences, allergie
 
     query = (
         f"### Recipe Request\n\n"
+        f"Only make 1 recipe\n\n"
+        f"Only make 1 course\n\n"
         f"I have the following ingredients available: **{ingredients}**.\n\n"
         f"The recipe is good for amount of {number_of_servings} people"
         f"I prefer **{food_preferences}** cuisine.\n\n"

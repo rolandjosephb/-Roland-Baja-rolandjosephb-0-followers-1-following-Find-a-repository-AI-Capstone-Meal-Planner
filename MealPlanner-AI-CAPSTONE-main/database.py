@@ -8,6 +8,8 @@ def connect_db():
 def create_table():
     conn = connect_db()
     cursor = conn.cursor()
+    
+    # Create table for meal plans
     cursor.execute("""
     CREATE TABLE IF NOT EXISTS meal_plans (
         id SERIAL PRIMARY KEY,
@@ -24,6 +26,7 @@ def create_table():
     );
     """)
     
+    # Create table for generated recipes
     cursor.execute("""
     CREATE TABLE IF NOT EXISTS recipe_generated (
         id SERIAL PRIMARY KEY,
@@ -32,6 +35,14 @@ def create_table():
         food_preferences TEXT,
         allergies TEXT,
         special_requests TEXT,
+        recipe TEXT
+    );
+    """)
+    
+    # Create table for favorite recipes
+    cursor.execute("""
+    CREATE TABLE IF NOT EXISTS favorite_recipes (
+        id SERIAL PRIMARY KEY,
         recipe TEXT
     );
     """)
@@ -52,17 +63,39 @@ def save_meal_plan(food_available, food_preference, allergies, weight, height, a
     cursor.close()
     conn.close()
 
-def save_generated_recipe(ingredients,number_of_servings, food_preferences, allergies, special_requests, recipe):
+def save_generated_recipe(ingredients, number_of_servings, food_preferences, allergies, special_requests, recipe):
     conn = connect_db()
     cursor = conn.cursor()
     cursor.execute("""
     INSERT INTO recipe_generated (ingredients, number_of_servings, food_preferences, allergies, special_requests, recipe)
-    VALUES (%s, %s,  %s, %s, %s, %s);
+    VALUES (%s, %s, %s, %s, %s, %s);
     """, (ingredients, number_of_servings, food_preferences, allergies, special_requests, recipe))
     
     conn.commit()
     cursor.close()
     conn.close()
+
+def save_recipe(recipe):
+    conn = connect_db()
+    cursor = conn.cursor()
+    cursor.execute("""
+    INSERT INTO favorite_recipes (recipe)
+    VALUES (%s);
+    """, (recipe,))
+    
+    conn.commit()
+    cursor.close()
+    conn.close()
+
+def get_favorite_recipes():
+    conn = connect_db()
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM favorite_recipes;")  
+    favorite_recipes = cursor.fetchall()
+    cursor.close()
+    conn.close()
+    return favorite_recipes
+
 
 def get_recipes():
     conn = connect_db()
@@ -81,10 +114,6 @@ def get_meal_plans():
     cursor.close()
     conn.close()
     return meal_plans
-
-
-
-
 
 def delete_meal_plan(meal_plan_id):
     conn = connect_db()

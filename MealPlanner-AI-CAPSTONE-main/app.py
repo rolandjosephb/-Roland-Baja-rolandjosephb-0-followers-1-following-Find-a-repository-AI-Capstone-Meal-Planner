@@ -3,7 +3,7 @@ from flask import Flask, request, jsonify, render_template, redirect, url_for
 import google.generativeai as genai
 from dotenv import load_dotenv
 from query import construct_meal_plan_query, construct_recipe, generate_random_form_data
-from database import create_table, save_meal_plan, get_meal_plans, delete_meal_plan, save_generated_recipe  # Import the new function for saving recipes
+from database import create_table, save_meal_plan, get_meal_plans, delete_meal_plan, save_generated_recipe, save_recipe, get_favorite_recipes  # Import new functions
 
 # API
 load_dotenv()
@@ -60,7 +60,6 @@ def generate_meal_plan():
     )
     return jsonify({"meal_plan": formatted_response})
 
-
 # Autogenerate answer
 @app.route('/autogenerate_form', methods=['GET'])
 def autogenerate_form():
@@ -72,8 +71,6 @@ def autogenerate_form():
 def view_meal_plans():
     meal_plans = get_meal_plans()
     return render_template('view_meal_plans.html', meal_plans=meal_plans)
-
-
 
 @app.route('/delete_meal_plan/<int:meal_plan_id>', methods=['POST'])
 def delete_meal_plan_route(meal_plan_id):
@@ -89,30 +86,36 @@ def recipe_generator():
 def generate_recipe():
     data = request.json
     ingredients = data.get("ingredients")
-    number_of_servings = data.get("Number of Servings")
+    number_of_servings = data.get("number_of_servings")  # Fixed typo in key
     food_preferences = data.get("food_preferences")
     allergies = data.get("allergies")
     special_requests = data.get("special_requests")
 
     # Construct the recipe query based on the input
-    query = construct_recipe(ingredients,number_of_servings, food_preferences, allergies, special_requests)
+    query = construct_recipe(ingredients, number_of_servings, food_preferences, allergies, special_requests)
     
     chat_session = model.start_chat(history=[])
     response = chat_session.send_message(query)
     formatted_response = response.text.strip()
     
     # Save the generated recipe to the database
-    save_generated_recipe(ingredients, number_of_servings, food_preferences, allergies, special_requests, formatted_response
-        )
+    save_generated_recipe(ingredients, number_of_servings, food_preferences, allergies, special_requests, formatted_response)
     
     return jsonify({"recipe": formatted_response})
 
+# Save favorite recipe
+@app.route('/save_favorite_recipe', methods=['POST'])
+def save_favorite_recipe():
+    data = request.get_json()
+    recipe = data.get('recipe')
+    save_recipe(recipe)  # Save the recipe to the database
+    return jsonify(success=True)
 
-
-
-
-
-
+# View favorite recipes
+@app.route('/view_favourite_recipes')
+def view_favourite_recipes():
+    favorite_recipes = get_favorite_recipes()  # Fetch the favorite recipes
+    return render_template('view_favourite_recipe.html', favorite_recipes=favorite_recipes)
 
 if __name__ == '__main__':
     app.run(debug=True)
