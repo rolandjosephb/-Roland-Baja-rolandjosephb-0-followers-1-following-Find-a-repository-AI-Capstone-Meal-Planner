@@ -1,3 +1,25 @@
+
+
+// Recipe Generation
+document.getElementById('recipe-generator-form')?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(e.target);
+    const data = Object.fromEntries(formData);
+
+    const response = await fetch('/generate_recipe', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    });
+
+    const result = await response.json();
+    document.getElementById('recipe-result').innerText = result.recipe;
+});
+
+// Meal Plan Generation
 document.getElementById('meal-plan-form').addEventListener('submit', async (e) => {
     e.preventDefault();
 
@@ -16,8 +38,22 @@ document.getElementById('meal-plan-form').addEventListener('submit', async (e) =
     document.getElementById('meal-plan-result').innerText = result.meal_plan;
 });
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // Autogenerate button
-document.getElementById('autogenerate').addEventListener('click', async () => {
+document.getElementById('autogenerate')?.addEventListener('click', async () => {
     const response = await fetch('/autogenerate_form', {
         method: 'GET',
     });
