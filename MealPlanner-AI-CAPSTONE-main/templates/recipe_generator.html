@@ -7,27 +7,37 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <h1>AI-Powered Recipe Generator</h1>
+    <h1>Recipe Generator</h1>
     <nav>
         <ul>
-            <li><a href="/">Generate Meal Plan</a></li>
-            <li><a href="/recipe_generator">Recipe Generator</a></li>
-            <li><a href="/">Nutrient & Caloric Tracking</a></li>
+            <li><a href="{{ url_for('index') }}">Generate Meal Plan</a></li>
+            <li><a href="{{ url_for('recipe_generator') }}">Recipe Generator</a></li>
+            <li><a href="/view_meal_plans">Nutrient & Caloric Tracking</a></li>
         </ul>
     </nav>
-    <form id="recipe-form">
-        <label for="recipe_input">Enter Ingredients (comma separated):</label>
-        <input type="text" id="recipe_input" name="recipe_input" required>
+    <form id="recipe-generator-form">
+        <label for="ingredients">Ingredients :</label>
+        <input type="text" id="ingredients" name="ingredients" required>
 
-        <label for="dietary_restrictions">Dietary Restrictions:</label>
-        <input type="text" id="dietary_restrictions" name="dietary_restrictions">
-
+        <label for="ingredients">Number of Servings :</label>
+        <input type="text" id="number_of_servings" name="number_of_servings" required>
+    
+        <label for="food_preferences">Food Preferences:</label>
+        <input type="text" id="food_preferences" name="food_preferences" required>
+    
+        <label for="allergies">Allergies:</label>
+        <input type="text" id="allergies" name="allergies">
+    
+        <label for="special_requests">Special Requests:</label>
+        <input type="text" id="special_requests" name="special_requests">
+    
         <input type="submit" value="Generate Recipe">
     </form>
-
+    
     <div id="recipe-result"></div>
+    
 
-    <button id="view-favorites-button" onclick="window.location.href='/view_favorites'">View Favorite Recipes</button>
+    <button id="view-recipes-button" onclick="window.location.href='/view_recipes'">View Generated Recipes</button>
 
     <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
