@@ -1,15 +1,15 @@
 setup a new environment
 
-pip install fastapi
-pip install openai
-pip install uvicorn
-pip install langchain
-pip install asyncio
-pip install asyncpg
-pip install google-generativeai
-pip install python-dotenv
-pip install flask
-pip install psycopg2
+pip install fastapi,
+pip install openai,
+pip install uvicorn,
+pip install langchain,
+pip install asyncio,
+pip install asyncpg,
+pip install google-generativeai,
+pip install python-dotenv,
+pip install flask,
+pip install psycopg2,
 
 
 For the .env file
