@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Favorite Recipes</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Favorite Recipes</h1>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('index') }}">Generate Meal Plan</a></li>
+                <li><a href="{{ url_for('recipe_generator') }}">Recipe Generator</a></li>
+                <li><a href="{{ url_for('view_favourite_recipes') }}">View Favorite Recipes</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <h2>Your Favorite Recipes</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Recipe</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if favorite_recipes %}
+                {% for recipe in favorite_recipes %}
+                <tr>
+                    <td>{{ recipe[0] }}</td> <!-- Recipe ID -->
+                    <td>{{ recipe[1] }}</td> <!-- Recipe Text -->
+                </tr>
+                {% endfor %}
+            {% else %}
+                <tr>
+                    <td colspan="2">No favorite recipes found.</td>
+                </tr>
+            {% endif %}
+        </tbody>
+    </table>
+</body>
+</html>

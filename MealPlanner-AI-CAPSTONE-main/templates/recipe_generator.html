@@ -13,13 +13,14 @@
             <li><a href="{{ url_for('index') }}">Generate Meal Plan</a></li>
             <li><a href="{{ url_for('recipe_generator') }}">Recipe Generator</a></li>
             <li><a href="/view_meal_plans">Nutrient & Caloric Tracking</a></li>
+            <li><a href="/view_favourite_recipes">View Favourite Recipes</a></li>
         </ul>
     </nav>
     <form id="recipe-generator-form">
         <label for="ingredients">Ingredients :</label>
         <input type="text" id="ingredients" name="ingredients" required>
 
-        <label for="ingredients">Number of Servings :</label>
+        <label for="number_of_servings">Number of Servings :</label>
         <input type="text" id="number_of_servings" name="number_of_servings" required>
     
         <label for="food_preferences">Food Preferences:</label>
@@ -35,10 +36,51 @@
     </form>
     
     <div id="recipe-result"></div>
-    
+    <button id="save-favorite" style="display:none;">Save as Favorite</button>
+    <div id="favorite-message" style="display:none; color: green;">Recipe saved as favorite!</div>
 
     <button id="view-recipes-button" onclick="window.location.href='/view_recipes'">View Generated Recipes</button>
 
     <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <script>
+        // Handle save favorite functionality
+        document.getElementById('recipe-generator-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const formData = new FormData(e.target);
+            const data = Object.fromEntries(formData);
+
+            const response = await fetch('/generate_recipe', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            });
+
+            const result = await response.json();
+            document.getElementById('recipe-result').innerText = result.recipe;
+
+            // Show save favorite button
+            document.getElementById('save-favorite').style.display = 'inline-block';
+        });
+
+        // Save favorite recipe
+        document.getElementById('save-favorite').addEventListener('click', async () => {
+            const recipe = document.getElementById('recipe-result').innerText;
+
+            const response = await fetch('/save_favorite_recipe', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ recipe }),
+            });
+
+            if (response.ok) {
+                document.getElementById('favorite-message').style.display = 'block';
+            }
+        });
+    </script>
 </body>
 </html>
