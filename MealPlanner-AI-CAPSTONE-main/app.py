@@ -3,7 +3,7 @@ from flask import Flask, request, jsonify, render_template, redirect, url_for
 import google.generativeai as genai
 from dotenv import load_dotenv
 from query import construct_meal_plan_query, construct_recipe, generate_random_form_data
-from database import create_table, save_meal_plan, get_meal_plans, delete_meal_plan, save_generated_recipe, save_recipe, get_favorite_recipes  # Import new functions
+from database import create_table, save_meal_plan, get_meal_plans, delete_meal_plan, save_generated_recipe, save_recipe, get_favorite_recipes
 
 # API
 load_dotenv()
@@ -86,7 +86,7 @@ def recipe_generator():
 def generate_recipe():
     data = request.json
     ingredients = data.get("ingredients")
-    number_of_servings = data.get("number_of_servings")  # Fixed typo in key
+    number_of_servings = data.get("number_of_servings")
     food_preferences = data.get("food_preferences")
     allergies = data.get("allergies")
     special_requests = data.get("special_requests")
@@ -103,12 +103,13 @@ def generate_recipe():
     
     return jsonify({"recipe": formatted_response})
 
-# Save favorite recipe
+# Save favorite recipe with a name
 @app.route('/save_favorite_recipe', methods=['POST'])
 def save_favorite_recipe():
     data = request.get_json()
     recipe = data.get('recipe')
-    save_recipe(recipe)  # Save the recipe to the database
+    name = data.get('name')  # Get the recipe name from the request
+    save_recipe(name, recipe)  # Save the recipe to the database with the name
     return jsonify(success=True)
 
 # View favorite recipes

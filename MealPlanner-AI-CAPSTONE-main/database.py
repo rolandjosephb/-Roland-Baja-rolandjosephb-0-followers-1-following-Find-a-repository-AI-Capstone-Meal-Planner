@@ -10,7 +10,7 @@ def create_table():
     cursor = conn.cursor()
     
     # Create table for meal plans
-    cursor.execute("""
+    cursor.execute(""" 
     CREATE TABLE IF NOT EXISTS meal_plans (
         id SERIAL PRIMARY KEY,
         food_available TEXT,
@@ -27,7 +27,7 @@ def create_table():
     """)
     
     # Create table for generated recipes
-    cursor.execute("""
+    cursor.execute(""" 
     CREATE TABLE IF NOT EXISTS recipe_generated (
         id SERIAL PRIMARY KEY,
         ingredients TEXT,
@@ -39,10 +39,11 @@ def create_table():
     );
     """)
     
-    # Create table for favorite recipes
-    cursor.execute("""
+    # Create table for favorite recipes with name
+    cursor.execute(""" 
     CREATE TABLE IF NOT EXISTS favorite_recipes (
         id SERIAL PRIMARY KEY,
+        name TEXT,  -- New column for the recipe name
         recipe TEXT
     );
     """)
@@ -54,7 +55,7 @@ def create_table():
 def save_meal_plan(food_available, food_preference, allergies, weight, height, age, number_of_people, sex, fitness_goal, meal_plan):
     conn = connect_db()
     cursor = conn.cursor()
-    cursor.execute("""
+    cursor.execute(""" 
     INSERT INTO meal_plans (food_available, food_preference, allergies, weight, height, age, number_of_people, sex, fitness_goal, meal_plan)
     VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s);
     """, (food_available, food_preference, allergies, weight, height, age, number_of_people, sex, fitness_goal, meal_plan))
@@ -66,7 +67,7 @@ def save_meal_plan(food_available, food_preference, allergies, weight, height, a
 def save_generated_recipe(ingredients, number_of_servings, food_preferences, allergies, special_requests, recipe):
     conn = connect_db()
     cursor = conn.cursor()
-    cursor.execute("""
+    cursor.execute(""" 
     INSERT INTO recipe_generated (ingredients, number_of_servings, food_preferences, allergies, special_requests, recipe)
     VALUES (%s, %s, %s, %s, %s, %s);
     """, (ingredients, number_of_servings, food_preferences, allergies, special_requests, recipe))
@@ -75,13 +76,13 @@ def save_generated_recipe(ingredients, number_of_servings, food_preferences, all
     cursor.close()
     conn.close()
 
-def save_recipe(recipe):
+def save_recipe(name, recipe):
     conn = connect_db()
     cursor = conn.cursor()
-    cursor.execute("""
-    INSERT INTO favorite_recipes (recipe)
-    VALUES (%s);
-    """, (recipe,))
+    cursor.execute(""" 
+    INSERT INTO favorite_recipes (name, recipe)
+    VALUES (%s, %s);
+    """, (name, recipe))
     
     conn.commit()
     cursor.close()
@@ -91,11 +92,10 @@ def get_favorite_recipes():
     conn = connect_db()
     cursor = conn.cursor()
     cursor.execute("SELECT * FROM favorite_recipes;")  
-    favorite_recipes = cursor.fetchall()
+    favorite_recipes = cursor.fetchall()  # Ensure this returns ID, Name, Recipe
     cursor.close()
     conn.close()
     return favorite_recipes
-
 
 def get_recipes():
     conn = connect_db()
