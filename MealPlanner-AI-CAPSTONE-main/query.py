@@ -5,11 +5,24 @@ def construct_meal_plan_query(food_available, food_preference, allergies, weight
     meal_suffix = f" for {number_of_people} people"
     
     query = (
-        f"The available food includes: {food_available}.\n Only Served available food if you dont have, tell them"
+        f"The available food includes: {food_available}.\n"
+        f"Only serve available food; if you don't have, tell them.\n"
         f"I prefer {food_preference} food.\n"
         f"I have allergies to {allergies}.\n"
-        f"My weight is {weight} kg and my height is {height}.\n"
-        f"I am {age} years old and I have {number_of_people} people to feed.\n"
+    )
+
+    # Add weight and height if provided
+    if weight is not None:
+        query += f"My weight is {weight} kg.\n"
+    if height is not None:
+        query += f"My height is {height} cm.\n"
+
+    # Add age if provided
+    if age is not None:
+        query += f"I am {age} years old.\n"
+
+    query += (
+        f"I have {number_of_people} people to feed.\n"
         f"My sex is {sex}.\n"
         f"My fitness goal is {fitness_goal}.\n"
        
@@ -34,6 +47,7 @@ def construct_meal_plan_query(food_available, food_preference, allergies, weight
         "Remember: A registered dietitian can provide more customized guidance, taking into account your individual needs and health status."
     )
     return query
+
 
 def construct_recipe(ingredients,number_of_servings , food_preferences, allergies, special_requests):
 

@@ -39,9 +39,9 @@ def generate_meal_plan():
     food_available = data.get("food_available")
     food_preference = data.get("food_preference")
     allergies = data.get("allergies")
-    weight = data.get("weight")
-    height = data.get("height")
-    age = data.get("age")
+    weight = data.get("weight") if data.get("weight") else None
+    height = data.get("height") if data.get("height") else None
+    age = data.get("age")  if data.get("age") else None
     number_of_people = data.get("number_of_people")
     sex = data.get("sex")
     fitness_goal = data.get("fitness_goal")
