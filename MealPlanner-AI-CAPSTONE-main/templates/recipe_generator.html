@@ -37,13 +37,14 @@
     
     <div id="recipe-result"></div>
     <button id="save-favorite" style="display:none;">Save as Favorite</button>
+    <input type="text" id="favorite-name" placeholder="Enter a name for the favorite" style="display:none;">
     <div id="favorite-message" style="display:none; color: green;">Recipe saved as favorite!</div>
 
-    <button id="view-recipes-button" onclick="window.location.href='/view_recipes'">View Generated Recipes</button>
+    <button id="view-recipes-button" onclick="window.location.href='/view_favourite_recipes'">View Favorite Recipes</button>
 
     <script src="{{ url_for('static', filename='script.js') }}"></script>
     <script>
-        // Handle save favorite functionality
+        // Handle recipe generation
         document.getElementById('recipe-generator-form').addEventListener('submit', async (e) => {
             e.preventDefault();
 
@@ -61,24 +62,32 @@
             const result = await response.json();
             document.getElementById('recipe-result').innerText = result.recipe;
 
-            // Show save favorite button
+            // Show save favorite button and name input
             document.getElementById('save-favorite').style.display = 'inline-block';
+            document.getElementById('favorite-name').style.display = 'inline-block'; // Show the name input
         });
 
         // Save favorite recipe
         document.getElementById('save-favorite').addEventListener('click', async () => {
             const recipe = document.getElementById('recipe-result').innerText;
+            const name = document.getElementById('favorite-name').value; // Get the entered name
+
+            if (name.trim() === "") {
+                alert("Please enter a name for the favorite recipe."); // Alert if no name is provided
+                return;
+            }
 
             const response = await fetch('/save_favorite_recipe', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ recipe }),
+                body: JSON.stringify({ recipe, name }), // Send the name along with the recipe
             });
 
             if (response.ok) {
                 document.getElementById('favorite-message').style.display = 'block';
+                document.getElementById('favorite-name').value = ''; // Clear the name input
             }
         });
     </script>

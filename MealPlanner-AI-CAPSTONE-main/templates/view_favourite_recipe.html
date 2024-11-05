@@ -23,6 +23,7 @@
         <thead>
             <tr>
                 <th>ID</th>
+                <th>Name</th> <!-- Changed header to 'Name' -->
                 <th>Recipe</th>
             </tr>
         </thead>
@@ -31,12 +32,13 @@
                 {% for recipe in favorite_recipes %}
                 <tr>
                     <td>{{ recipe[0] }}</td> <!-- Recipe ID -->
-                    <td>{{ recipe[1] }}</td> <!-- Recipe Text -->
+                    <td>{{ recipe[1] }}</td> <!-- Recipe Name -->
+                    <td>{{ recipe[2] }}</td> <!-- Recipe Text -->
                 </tr>
                 {% endfor %}
             {% else %}
                 <tr>
-                    <td colspan="2">No favorite recipes found.</td>
+                    <td colspan="3">No favorite recipes found.</td>
                 </tr>
             {% endif %}
         </tbody>
