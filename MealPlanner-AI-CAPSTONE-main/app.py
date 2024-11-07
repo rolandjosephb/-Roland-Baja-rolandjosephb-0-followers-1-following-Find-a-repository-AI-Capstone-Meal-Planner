@@ -5,13 +5,14 @@ from dotenv import load_dotenv
 from query import construct_meal_plan_query, construct_recipe, generate_random_form_data
 from database import create_table, save_meal_plan, get_meal_plans, delete_meal_plan, save_generated_recipe, save_recipe, get_favorite_recipes
 
+
 # API
 load_dotenv()
 genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
 
 # Openai model
 generation_config = {
-    "temperature": 1,
+    "temperature": 1, #creativity/randomness
     "top_p": 0.95,
     "top_k": 64,
     "max_output_tokens": 8192,
@@ -60,11 +61,24 @@ def generate_meal_plan():
     )
     return jsonify({"meal_plan": formatted_response})
 
+
+
+
+
+
+
+
 # Autogenerate answer
 @app.route('/autogenerate_form', methods=['GET'])
 def autogenerate_form():
     generated_data = generate_random_form_data()
     return jsonify(generated_data)
+
+
+
+
+
+
 
 # Meal plan history
 @app.route('/view_meal_plans', methods=['GET'])
@@ -120,3 +134,10 @@ def view_favourite_recipes():
 
 if __name__ == '__main__':
     app.run(debug=True)
+
+#from waitress import serve
+
+
+#if __name__ == "__main__":
+    #serve(app.run(debug=True, use_reloader=False), host='0.0.0.0', port=5000)
+    #http://127.0.0.1:5000

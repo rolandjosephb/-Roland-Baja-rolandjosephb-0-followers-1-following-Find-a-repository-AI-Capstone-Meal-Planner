@@ -26,6 +26,12 @@ def construct_meal_plan_query(food_available, food_preference, allergies, weight
         f"My sex is {sex}.\n"
         f"My fitness goal is {fitness_goal}.\n"
        
+       "I always want this on this output to show weight, height inputed, and show bmi amount. calculate BMI per person using weight and height. for missing info, put missing info The format is below:\n" 
+       f"The BMI for {meal_suffix} is:\n Person Number: weight, height, BMI \n"
+
+      
+
+
         "Please create a 7-day meal plan with specific meals formatted like:\n"
         "Day 1:\n\n"
         f"Breakfast (# calories):** Example meal description{meal_suffix}.\n"
