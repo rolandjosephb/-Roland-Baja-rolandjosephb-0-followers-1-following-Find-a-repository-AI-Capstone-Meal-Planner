@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe Generator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Recipe Generator</h1>
+    <nav>
+        <ul>
+            <li><a href="{{ url_for('index') }}">Generate Meal Plan</a></li>
+            <li><a href="{{ url_for('recipe_generator') }}">Recipe Generator</a></li>
+            <li><a href="/view_meal_plans">Meal Plan History</a></li>
+            <li><a href="/view_favourite_recipes">View Favourite Recipes</a></li>
+        </ul>
+    </nav>
+    <form id="recipe-generator-form">
+        <label for="ingredients">Ingredients :</label>
+        <input type="text" id="ingredients" name="ingredients" required>
+
+        <label for="number_of_servings">Number of Servings :</label>
+        <input type="text" id="number_of_servings" name="number_of_servings" required>
+    
+        <label for="food_preferences">Food Preferences:</label>
+        <input type="text" id="food_preferences" name="food_preferences" required>
+    
+        <label for="allergies">Allergies:</label>
+        <input type="text" id="allergies" name="allergies">
+    
+        <label for="special_requests">Special Requests:</label>
+        <input type="text" id="special_requests" name="special_requests">
+    
+        <input type="submit" value="Generate Recipe">
+    </form>
+    
+    <div id="recipe-result"></div>
+    <button id="save-favorite" style="display:none;">Save as Favorite</button>
+    <input type="text" id="favorite-name" placeholder="Enter a name for the favorite" style="display:none;">
+    <div id="favorite-message" style="display:none; color: green;">Recipe saved as favorite!</div>
+
+    <button id="view-recipes-button" onclick="window.location.href='/view_favourite_recipes'">View Favorite Recipes</button>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <script>
+        // Handle recipe generation
+        document.getElementById('recipe-generator-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const formData = new FormData(e.target);
+            const data = Object.fromEntries(formData);
+
+            const response = await fetch('/generate_recipe', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            });
+
+            const result = await response.json();
+            document.getElementById('recipe-result').innerText = result.recipe;
+
+            // Show save favorite button and name input
+            document.getElementById('save-favorite').style.display = 'inline-block';
+            document.getElementById('favorite-name').style.display = 'inline-block'; // Show the name input
+        });
+
+        // Save favorite recipe
+        document.getElementById('save-favorite').addEventListener('click', async () => {
+            const recipe = document.getElementById('recipe-result').innerText;
+            const name = document.getElementById('favorite-name').value; // Get the entered name
+
+            if (name.trim() === "") {
+                alert("Please enter a name for the favorite recipe."); // Alert if no name is provided
+                return;
+            }
+
+            const response = await fetch('/save_favorite_recipe', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ recipe, name }), // Send the name along with the recipe
+            });
+
+            if (response.ok) {
+                document.getElementById('favorite-message').style.display = 'block';
+                document.getElementById('favorite-name').value = ''; // Clear the name input
+            }
+        });
+    </script>
+</body>
+</html>
