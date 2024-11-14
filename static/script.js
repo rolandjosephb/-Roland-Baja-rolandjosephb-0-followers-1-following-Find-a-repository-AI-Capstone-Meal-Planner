@@ -17,6 +17,8 @@ document.getElementById('recipe-generator-form')?.addEventListener('submit', asy
     document.getElementById('recipe-result').innerText = result.recipe;
 });
 
+
+
 // Meal Plan Generation
 document.getElementById('meal-plan-form').addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -35,6 +37,8 @@ document.getElementById('meal-plan-form').addEventListener('submit', async (e) =
     const result = await response.json();
     document.getElementById('meal-plan-result').innerText = result.meal_plan;
 });
+
+
 
 // Nutrient and Calorie Tracking
 document.getElementById('nutrient-and-calorie-form')?.addEventListener('submit', async (e) => {

@@ -45,7 +45,7 @@
 
     <script src="{{ url_for('static', filename='script.js') }}"></script>
     <script>
-        // Handle recipe generation
+   
         document.getElementById('recipe-generator-form').addEventListener('submit', async (e) => {
             e.preventDefault();
 
@@ -63,18 +63,16 @@
             const result = await response.json();
             document.getElementById('recipe-result').innerText = result.recipe;
 
-            // Show save favorite button and name input
+
             document.getElementById('save-favorite').style.display = 'inline-block';
-            document.getElementById('favorite-name').style.display = 'inline-block'; // Show the name input
+            document.getElementById('favorite-name').style.display = 'inline-block';
         });
 
-        // Save favorite recipe
         document.getElementById('save-favorite').addEventListener('click', async () => {
             const recipe = document.getElementById('recipe-result').innerText;
-            const name = document.getElementById('favorite-name').value; // Get the entered name
-
+            const name = document.getElementById('favorite-name').value; 
             if (name.trim() === "") {
-                alert("Please enter a name for the favorite recipe."); // Alert if no name is provided
+                alert("Please enter a name for the favorite recipe."); 
                 return;
             }
 
@@ -83,12 +81,12 @@
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ recipe, name }), // Send the name along with the recipe
+                body: JSON.stringify({ recipe, name }), 
             });
 
             if (response.ok) {
                 document.getElementById('favorite-message').style.display = 'block';
-                document.getElementById('favorite-name').value = ''; // Clear the name input
+                document.getElementById('favorite-name').value = ''; 
             }
         });
     </script>
