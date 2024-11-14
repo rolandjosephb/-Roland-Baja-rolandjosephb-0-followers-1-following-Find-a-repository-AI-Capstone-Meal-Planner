@@ -99,6 +99,17 @@ th, td {
     background-color: rgba(255, 255, 255, 0.8);
 }
 
-#chatbot-feedback p {
-    white-space: pre-wrap; /* Preserves line breaks in text */
+
+td .whocares-pre {
+
+    overflow: auto;     /* Allow scrolling if content overflows */
+    white-space: pre-wrap; /* Wrap long lines */
+    word-wrap: break-word; /* Break long words if needed */
+    font-family: monospace; /* Monospaced font */
+    border: 1px solid #ccc; /* Optional: Border for visibility */
+    padding: 5px;       /* Optional: Padding inside the <pre> */
 }
+
+
+
+

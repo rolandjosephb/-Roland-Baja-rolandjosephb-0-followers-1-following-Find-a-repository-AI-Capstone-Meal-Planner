@@ -35,7 +35,7 @@
                 <tr>
                     <td>{{ recipe[0] }}</td> <!-- Recipe ID -->
                     <td>{{ recipe[1] }}</td> <!-- Recipe Name -->
-                    <td><pre>{{ recipe[2] }}</pre></td>  <!-- Recipe Text -->
+                    <td><pre class="whocares-pre">{{ recipe[2] }}</pre></td>  <!-- Recipe Text -->
                     <td>
                         <!-- Form for deleting the recipe -->
                         <form action="{{ url_for('delete_favorite_recipe', recipe_id=recipe[0]) }}" method="POST">

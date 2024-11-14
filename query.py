@@ -137,12 +137,12 @@ def construct_nutrient_and_calorie_query(bmi, meal_details, calories, nutrients,
         f"Meal Details: {meal_details}\n"
         f"Calories in the meal: {calories}\n"
         f"Nutrients present in the meal: {nutrients}\n"
-        f"User's fitness goal: {goals}\n\n"
+        f"User's fitness goal: {goals}\n"
         
         "Feedback:\n"
         "Based on the provided meal details, we will assess if the meal aligns with the user's fitness goals and give feedback.\n"
         "The meal contains a total of {calories} calories, which should be considered in relation to the user's goals.\n"
-        "We will also evaluate the nutrients mentioned and provide suggestions to optimize the meal for the specified fitness goal.\n\n"
+        "We will also evaluate the nutrients mentioned and provide suggestions to optimize the meal for the specified fitness goal.\n"
         
         "If the meal exceeds the calorie goal, we will recommend cutting back on certain ingredients. "
         "If it falls short, we will suggest adding more nutrient-dense items to meet the user's needs."
