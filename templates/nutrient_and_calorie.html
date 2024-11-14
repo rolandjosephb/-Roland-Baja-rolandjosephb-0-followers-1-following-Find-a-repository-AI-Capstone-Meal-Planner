@@ -34,7 +34,7 @@
             <input type="number" id="calories" name="calories" placeholder="e.g., 350" required>
         
             <label for="nutrients">Nutrients Description:</label>
-            <textarea id="nutrients" name="nutrients" placeholder="e.g., Protein 40g, Carbohydrates 50g, etc." required></textarea>
+            <textarea id="nutrients" name="nutrients" placeholder="e.g., Protein 40g, Carbohydrates 50g, etc." required rows="10" cols="50"></textarea>
         
             <label for="goals">Goals:</label>
             <input type="text" id="goals" name="goals" placeholder="e.g., Lose weight, Gain muscle" required>
@@ -42,8 +42,8 @@
             <button type="submit">Track Nutrient and Calorie</button>
         </form>
         
-
-        <div id="chatbot-feedback">
+       
+        <div id="nutrient_calorie-result">
             {% if feedback %}
                 <h3>Chatbot Feedback:</h3>
                 <pre class="whocares-pre">{{ feedback }}</pre>

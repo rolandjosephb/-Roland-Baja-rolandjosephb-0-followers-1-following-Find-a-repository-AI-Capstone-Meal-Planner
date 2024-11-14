@@ -17,9 +17,12 @@
                 <li><a href="{{ url_for('view_favourite_recipes') }}">View Favorite Recipes</a></li>
                 <li><a href="{{ url_for('nutrient_and_calorie') }}">Track Nutrient & Calorie</a></li>
         </nav>
+        
     </header>
     
-    <h2>Your Favorite Recipes</h2>
+
+
+
     <table>
         <thead>
             <tr>
@@ -29,6 +32,9 @@
                 <th>Actions</th> 
             </tr>
         </thead>
+
+
+
         <tbody>
             {% if favorite_recipes %}
                 {% for recipe in favorite_recipes %}
@@ -50,6 +56,9 @@
                 </tr>
             {% endif %}
         </tbody>
+
+
+
     </table>
 </body>
 </html>

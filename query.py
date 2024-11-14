@@ -146,6 +146,9 @@ def construct_nutrient_and_calorie_query(bmi, meal_details, calories, nutrients,
         
         "If the meal exceeds the calorie goal, we will recommend cutting back on certain ingredients. "
         "If it falls short, we will suggest adding more nutrient-dense items to meet the user's needs."
+        "In general, the key is to strike a balance between all the macronutrients—proteins, carbs, and fats—as well as ensuring you're meeting your micronutrient needs like vitamins and minerals.\n\n"
+        
+        "Remember, nutrition isn't about strict rules but finding what works best for you. Small adjustments to meals can make a big difference over time, helping you stay on course toward achieving your fitness goals.\n\n"
         
         "Remember to keep in mind the importance of balance in macronutrients (carbs, proteins, fats) and micronutrients (vitamins, minerals)."
     )

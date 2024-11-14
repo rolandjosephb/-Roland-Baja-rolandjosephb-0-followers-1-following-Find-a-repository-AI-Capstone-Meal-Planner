@@ -5,12 +5,10 @@ from dotenv import load_dotenv
 from query import construct_meal_plan_query, construct_recipe, generate_random_form_data, construct_nutrient_and_calorie_query
 from database import create_table, save_meal_plan, get_meal_plans, delete_meal_plan, save_generated_recipe, save_recipe, get_favorite_recipes,delete_favorite_recipe_from_db 
 
-
-# API
 load_dotenv()
 genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
 
-# Openai model
+
 generation_config = {
     "temperature": 1, #creativity/randomness
     "top_p": 0.95,

@@ -9,10 +9,6 @@ def connect_db():
     #conn = psycopg2.connect(dbname="postgres", user="team1", password="mypassword", host="134.231.46.151", port="5432")
     #return conn
 
-
-
-
-
 def create_table():
     conn = connect_db()
     cursor = conn.cursor()

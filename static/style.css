@@ -7,7 +7,7 @@ body {
     color: rgb(0, 0, 0);
 }
 
-h1 {
+h1,h2, h3 {
     text-align: center;
     color: #333;
 }
@@ -76,7 +76,8 @@ input[type="submit"]:hover {
 }
 
 #meal-plan-result,
-#recipe-result {
+#recipe-result,
+#nutrient_calorie-result {
     margin-top: 20px;
     padding: 10px;
     background: white;

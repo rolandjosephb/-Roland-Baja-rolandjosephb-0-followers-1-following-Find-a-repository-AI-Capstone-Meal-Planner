@@ -35,13 +35,19 @@
     
         <input type="submit" value="Generate Recipe">
     </form>
+
+
     
     <div id="recipe-result"></div>
     <button id="save-favorite" style="display:none;">Save as Favorite</button>
     <input type="text" id="favorite-name" placeholder="Enter a name for the favorite" style="display:none;">
     <div id="favorite-message" style="display:none; color: green;">Recipe saved as favorite!</div>
 
+
+
     <button id="view-recipes-button" onclick="window.location.href='/view_favourite_recipes'">View Favorite Recipes</button>
+
+
 
     <script src="{{ url_for('static', filename='script.js') }}"></script>
     <script>
@@ -67,6 +73,8 @@
             document.getElementById('save-favorite').style.display = 'inline-block';
             document.getElementById('favorite-name').style.display = 'inline-block';
         });
+
+        
 
         document.getElementById('save-favorite').addEventListener('click', async () => {
             const recipe = document.getElementById('recipe-result').innerText;
