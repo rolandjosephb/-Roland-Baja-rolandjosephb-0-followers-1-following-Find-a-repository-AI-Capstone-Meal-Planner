@@ -155,7 +155,7 @@ def generate_random_form_data():
 
 #     return query
 
-def construct_nutrient_and_calorie_query(bmi, meal_details, calories, nutrients, goals):
+def construct_nutrient_and_calorie_query(user_info, meal_details, calories, nutrients, goals):
     """
     Generates a feedback query to evaluate a 7-day meal plan based on User Info, calorie intake, nutrients, and fitness goals.
     
@@ -171,7 +171,7 @@ def construct_nutrient_and_calorie_query(bmi, meal_details, calories, nutrients,
     """
     query = (
         f"### Nutrient and Calorie Evaluation\n\n"
-        f"User's Info: {bmi}\n"
+        f"User's Info: {user_info}\n"
         f"Meal Plan Details:\n{meal_details}\n\n"
         f"Caloric Value: {calories} kcal\n"
         f"Nutrient Composition: {nutrients}\n"
@@ -179,7 +179,7 @@ def construct_nutrient_and_calorie_query(bmi, meal_details, calories, nutrients,
         
         "### Feedback Analysis:\n"
         "1. **Calories vs Fitness Goals**:\n"
-        f"- The provided User Info of {bmi} is compared to the caloric intake ({calories} kcal). "
+        f"- The provided User Info of {user_info} is compared to the caloric intake ({calories} kcal). "
         "This helps determine whether the meal supports the user's goal (e.g., weight loss, muscle gain, maintenance).\n"
         "- Example: A high BMI aiming for weight loss might require fewer calories, while muscle gain goals might demand a caloric surplus.\n\n"
         

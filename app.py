@@ -152,14 +152,14 @@ def nutrient_and_calorie():
 @app.route('/track_nutrient_and_calorie', methods=['POST'])
 def track_nutrient_and_calorie():
     # Extract form data
-    bmi = request.form['bmi']
+    user_info = request.form['user_info']
     meal_details = request.form['meal_details']
     calories = request.form['calories']
     nutrients = request.form['nutrients']
     goals = request.form['goals']
 
     # Construct the query using the provided data
-    query = construct_nutrient_and_calorie_query(bmi, meal_details, calories, nutrients, goals)
+    query = construct_nutrient_and_calorie_query(user_info, meal_details, calories, nutrients, goals)
 
     # Send the query to the AI model
     chat_session = model.start_chat(history=[])
