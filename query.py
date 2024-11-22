@@ -156,34 +156,45 @@ def generate_random_form_data():
 #     return query
 
 def construct_nutrient_and_calorie_query(bmi, meal_details, calories, nutrients, goals):
-    # Create a feedback message based on the input data
+    """
+    Generates a feedback query to evaluate a 7-day meal plan based on User Info, calorie intake, nutrients, and fitness goals.
+    
+    Args:
+        User Info (str): BMI, Sex, Age, Activity.
+        meal_details (str): 7-day meal plan with the number of people and detailed meal information.
+        calories (int): Caloric value of the meal.
+        nutrients (dict): Nutrients present in the meal with their values.
+        goals (str): User's fitness goals (e.g., weight loss, muscle gain, maintenance).
+    
+    Returns:
+        str: A detailed feedback query.
+    """
     query = (
-        f"### Nutrient and Calorie Tracking\n\n"
+        f"### Nutrient and Calorie Evaluation\n\n"
         f"User's BMI: {bmi}\n"
-        f"Meal Details: {meal_details}\n"
-        f"Calories in the meal: {calories}\n"
-        f"Nutrients present in the meal: {nutrients}\n"
-        f"User's fitness goal: {goals}\n\n"
+        f"Meal Plan Details:\n{meal_details}\n\n"
+        f"Caloric Value: {calories} kcal\n"
+        f"Nutrient Composition: {nutrients}\n"
+        f"Fitness Goals: {goals}\n\n"
         
-        "Feedback:\n"
-        "We will assess the meal by comparing its details with the user's fitness goals, BMI, and calorie intake:\n\n"
+        "### Feedback Analysis:\n"
+        "1. **Calories vs Fitness Goals**:\n"
+        f"- The provided BMI of {bmi} is compared to the caloric intake ({calories} kcal). "
+        "This helps determine whether the meal supports the user's goal (e.g., weight loss, muscle gain, maintenance).\n"
+        "- Example: A high BMI aiming for weight loss might require fewer calories, while muscle gain goals might demand a caloric surplus.\n\n"
         
-        "1. **Meal Details vs Goals**:\n"
-        f"- Based on the meal details ('{meal_details}'), we will evaluate its alignment with the fitness goals ('{goals}').\n"
-        f"- For example, a 'high protein' meal might support muscle gain, while a 'low fat' meal could align better with weight loss goals.\n\n"
+        "2. **Nutrient Alignment with Goals**:\n"
+        f"- The nutrient profile ({nutrients}) is evaluated. For instance:\n"
+        "  - High protein supports muscle gain.\n"
+        "  - Balanced macros align with maintenance.\n"
+        "  - Reduced carbs/fats may better suit weight loss.\n\n"
         
-        "2. **Meal Details vs BMI and Calories**:\n"
-        f"- With a BMI of {bmi}, the meal's calorie content ({calories} calories) will be analyzed to ensure it fits the user's recommended daily intake.\n"
-        f"- For instance, if the meal is 'high calorie' and the BMI suggests a weight loss plan, we might recommend adjusting portion sizes or substituting ingredients.\n"
-        f"- Conversely, a 'low calorie' meal might need additional nutrient-dense foods to support muscle gain or active lifestyles.\n\n"
+        "3. **Meal Plan Suggestions**:\n"
+        "- If calories exceed daily requirements, reduce portions or replace high-calorie items.\n"
+        "- Add nutrient-dense foods if lacking specific vitamins/minerals.\n"
+        "- Tailor macros to better align with the fitness goals.\n\n"
         
-        "3. **Nutrient Composition**:\n"
-        f"- The meal's nutrients ({nutrients}) will also be reviewed to ensure they align with the user's goals and BMI. "
-        "For example, meals rich in protein are beneficial for muscle gain, while balanced macronutrients support overall health.\n\n"
-        
-        "In conclusion, this evaluation considers the user's BMI, calorie requirements, and fitness goals to provide tailored feedback. "
-        "The goal is to optimize the meal for better alignment with health objectives while maintaining a balanced nutrient profile."
+        "### Conclusion:\n"
+        "This analysis evaluates the meal plan for alignment with the user's BMI, nutrient needs, and fitness goals, providing actionable suggestions to optimize health outcomes."
     )
-
     return query
-
