@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Favorite Recipes</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Favorite Recipes</h1>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('index') }}">Generate Meal Plan</a></li>
+                <li><a href="{{ url_for('recipe_generator') }}">Recipe Generator</a></li>
+                <li><a href="{{ url_for('view_meal_plans') }}">Meal Plan History</a></li>
+                <li><a href="{{ url_for('view_favourite_recipes') }}">View Favorite Recipes</a></li>
+                <li><a href="{{ url_for('nutrient_and_calorie') }}">Track Nutrient & Calorie</a></li>
+        </nav>
+        
+    </header>
+    
+
+
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Recipe</th>
+                <th>Actions</th> 
+            </tr>
+        </thead>
+
+
+
+        <tbody>
+            {% if favorite_recipes %}
+                {% for recipe in favorite_recipes %}
+                <tr>
+                    <td>{{ recipe[0] }}</td> 
+                    <td>{{ recipe[1] }}</td>
+                    <td><pre class="whocares-pre">{{ recipe[2] }}</pre></td> 
+                    <td>
+                       
+                        <form action="{{ url_for('delete_favorite_recipe', recipe_id=recipe[0]) }}" method="POST">
+                            <input type="submit" value="Delete">
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            {% else %}
+                <tr>
+                    <td colspan="4">No favorite recipes found.</td> 
+                </tr>
+            {% endif %}
+        </tbody>
+
+
+
+    </table>
+</body>
+</html>

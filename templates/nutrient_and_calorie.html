@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nutrient and Calorie Tracking</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</head>
+<body>
+    <div class="container">
+        
+        <header>
+            <h1>Nutrient and Calorie Tracking</h1>
+            <nav>
+                <ul>
+                    <li><a href="{{ url_for('index') }}">Generate Meal Plan</a></li>
+                    <li><a href="{{ url_for('recipe_generator') }}">Recipe Generator</a></li>
+                    <li><a href="{{ url_for('view_meal_plans') }}">Meal Plan History</a></li>
+                    <li><a href="{{ url_for('view_favourite_recipes') }}">View Favorite Recipes</a></li>
+                    <li><a href="{{ url_for('nutrient_and_calorie') }}">Track Nutrient & Calorie</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <form id="nutrient-and-calorie-form" action="/track_nutrient_and_calorie" method="POST">
+            <label for="bmi">Enter your BMI :</label>
+            <input type="text" id="bmi" name="bmi" placeholder="e.g., 25.5" required>
+        
+
+        
+            <label for="calories">Calories:</label>
+            <input type="number" id="calories" name="calories" placeholder="e.g., 350" required>
+        
+            <label for="nutrients">Nutrients Description:</label>
+            <textarea id="nutrients" name="nutrients" placeholder="e.g., Protein 40g, Carbohydrates 50g, etc." required rows="10" cols="50"></textarea>
+        
+            <label for="goals">Goals:</label>
+            <input type="text" id="goals" name="goals" placeholder="e.g., Lose weight, Gain muscle" required><br><br>
+
+            <label for="meal_details">Meal Plan List:</label>
+            <select id="meal_details" name="meal_details">
+                <option value="" disabled selected>Choose a meal</option>
+            </select>
+            <br><br>
+
+                
+        
+            <button type="submit">Submit</button>
+
+
+
+        </form>
+        
+       
+        <div id="nutrient_calorie-result">
+            {% if feedback %}
+                <h3>Chatbot Feedback:</h3>
+                <pre class="whocares-pre">{{ feedback }}</pre>
+            {% endif %}
+        </div>
+        
+
+    </div>
+</body>
+</html>

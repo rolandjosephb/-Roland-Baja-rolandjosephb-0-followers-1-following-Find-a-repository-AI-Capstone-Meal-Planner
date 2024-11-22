@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meal Planner</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <h1>Meal Planner</h1>
+    <nav>
+        <ul>
+            <li><a href="{{ url_for('index') }}">Generate Meal Plan</a></li>
+            <li><a href="{{ url_for('recipe_generator') }}">Recipe Generator</a></li>
+            <li><a href="{{ url_for('view_meal_plans') }}">Meal Plan History</a></li>
+            <li><a href="{{ url_for('view_favourite_recipes') }}">View Favorite Recipes</a></li>
+            <li><a href="{{ url_for('nutrient_and_calorie') }}">Track Nutrient & Calorie</a></li>
+        </ul>
+    </nav>
+
+    <form id="meal-plan-form">
+        <label for="food_available">Food Available:</label>
+        <input type="text" id="food_available" name="food_available">
+
+        <label for="food_preference">Food Preference:(Optional)</label>
+        <input type="text" id="food_preference" name="food_preference">
+
+
+
+        <label for="allergies">Allergies:</label>
+        <input type="text" id="allergies" name="allergies">
+
+        <label for="weight">Weight (kg)(Seperate By Comma)(Optional):</label>
+        <input type="text" id="weight" name="weight" >
+
+        <label for="height">Height (e.g., 5'6)(Seperate By Comma)(Optional):</label>
+        <input type="text" id="height" name="height" >
+
+        <label for="age">Age(Seperate By Comma)(Optional):</label>
+        <input type="text" id="age" name="age" >
+
+
+
+        <label for="number_of_people">Number of People:</label>
+        <input type="number" id="number_of_people" name="number_of_people" required>
+
+        <label for="sex">Sex(Seperate By Comma)(Optional):</label>
+        <input type="text" id="sex" name="sex">
+
+        <label for="fitness_goal">Fitness Goal(Optional):</label>
+        <input type="text" id="fitness_goal" name="fitness_goal">
+
+        <button type="button" id="autogenerate">Autogenerate</button>
+
+        <input type="submit" value="Generate Meal Plan">
+    </form>
+
+    
+
+    <div id="meal-plan-result"></div>
+
+    <button id="view-meal-plans-button" onclick="window.location.href='/view_meal_plans'">View Meal Plans History</button>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
