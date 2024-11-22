@@ -153,7 +153,7 @@ def test_track_nutrient_and_calorie(mock_start_chat, mock_construct_nutrient_que
     mock_construct_nutrient_query.return_value = "Generated Nutrient Query"
 
     response = client.post('/track_nutrient_and_calorie', data={
-        "bmi": "22.5",
+        "user_info": "22.5",
         "meal_details": "Pasta",
         "calories": "500",
         "nutrients": "Carbs",
