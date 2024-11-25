@@ -25,11 +25,8 @@ def construct_meal_plan_query(food_available, food_preference, allergies, weight
         f"I have {number_of_people} people to feed.\n"
         f"My sex is {sex}.\n"
         f"My fitness goal is {fitness_goal}.\n"
-
-       "I always want this on this output to show weight, height inputed, and show bmi amount. calculate BMI per person using weight and height. The imnput from the user will be seperated by comma. for example weight is 88, 87, 86 or height is 5'6, 5'7, or 5,8\n" 
-       
-
-      
+       "put a short title here: for example: Meal plan for chicken, beef, and salad."
+       "I always want this on this output to show weight, height inputed, and show bmi amount. calculate BMI per person using weight and height. The imnput from the user will be seperated by comma. for example weight is 88, 87, 86 or height is 5'6, 5'7, or 5,8\n"   
 
 
         "Please create a 7-day meal plan with specific meals formatted like:\n"
