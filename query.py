@@ -63,7 +63,7 @@ def construct_recipe(ingredients,number_of_servings , food_preferences, allergie
         f"I prefer **{food_preferences}** cuisine.\n\n"
         f"I am allergic to: **{allergies}**. Please ensure these are not included in the recipe.\n\n"
         f"Special requests: **{special_requests}**. \n\n"
-        f"Based on the above information, please create a **3-course recipe** that is easy to follow:\n\n"
+        f"Based on the above information, please create a **1-course recipe** that is easy to follow:\n\n"
         f"**Recipe Name:**\n\n"
         f"**Cooking Time:** Approximately 1 hour\n\n"
         
