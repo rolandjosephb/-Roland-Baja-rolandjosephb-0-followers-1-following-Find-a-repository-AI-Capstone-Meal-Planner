@@ -190,7 +190,8 @@ def construct_nutrient_and_calorie_query(user_info, meal_details, calories, nutr
         "- If calories exceed daily requirements, reduce portions or replace high-calorie items.\n"
         "- Add nutrient-dense foods if lacking specific vitamins/minerals.\n"
         "- Tailor macros to better align with the fitness goals.\n\n"
-        
+
+
         "### Conclusion:\n"
         "This analysis evaluates the meal plan for alignment with the user's BMI, nutrient needs, and fitness goals, providing actionable suggestions to optimize health outcomes."
     )
